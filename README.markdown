@@ -8,13 +8,13 @@
 
 这个项目的目标是 **解释算法的实现原理**。关注点在于让代码更加清晰易读，而不是实现一个可以直接用在你自己项目里的依赖库。也就是说，虽然这里的大多数代码都是可以在实际场景中使用的，但是在你粘贴过去之后千万要注意检查它们是不是真的合适。
 
-这里的代码都基于 ***Xcode 10** 和 **Swift 4.2** 编写。
+这里的代码基于 **Xcode 10** 和 **Swift 4.2** 编写。
 
 **欢迎留下你的建议或参与共建！**
 
 ## 重要的链接
 
-[什么是算法和数据结构？](What%20are%20Algorithms.markdown) 煎饼果子！
+[什么是算法和数据结构？](What%20are%20Algorithms.markdown) 看菜谱做菜！
 
 [为什么要学习算法？](Why%20Algorithms.markdown) 如果你在犹豫这些内容是否适合自己，来看看这个。
 
@@ -22,7 +22,7 @@
 
 [算法设计的技巧](Algorithm%20Design.markdown)。如何创造一个新的算法？
 
-[参与共建](https://github.com/raywenderlich/swift-algorithm-club/blob/master/.github/CONTRIBUTING.md). 创建一个 issue 或者这 Pull Request。
+[欢迎参与共建](https://github.com/raywenderlich/swift-algorithm-club/blob/master/.github/CONTRIBUTING.md)。你可以通过创建 issue 或 Pull Request 的方式给这个项目提供帮助。
 
 ## 从哪里开始？
 
@@ -43,7 +43,7 @@
 - [二分查找](Binary%20Search/)。在一个有序数组中快速查找元素。
 - [计算出现次数](Count%20Occurrences/)。计算某个值在数组中出现的次数。
 - [查找最小值/最大值](Select%20Minimum%20Maximum)。计算数组中的最小值/最大值。
-- [第k大的元素](Kth%20Largest%20Element/)。查找数组中第k大的元素，比如中位数。
+- [第 k 大的元素](Kth%20Largest%20Element/)。查找数组中第k大的元素，比如中位数。
 - [选择抽样](Selection%20Sampling/)。在集合中随机选取一批元素。
 - [查找集合](Union-Find/)。跟踪集合间不重复的元素，以便能快速合并多个集合。
 
@@ -52,14 +52,14 @@
 
 - [穷举法](Brute-Force%20String%20Search/)。一种简单直白的方法。
 - [摩尔算法](Boyer-Moore-Horspool/)。一种快速搜索子串的方法。它借助一张查询表来跳过某些字符，从而避免对每个字符都进行处理。
-- [KMP算法](Knuth-Morris-Pratt/)。一种有着线性时间复杂度的算法，可以返回给定规律的子串的出现下标。
-- [Rabin-Karp算法](Rabin-Karp/)。一种基于哈希的更快的查询方法。
+- [KMP 算法](Knuth-Morris-Pratt/)。一种有着线性时间复杂度的算法，可以返回给定规律的子串的出现下标。
+- [Rabin-Karp 算法](Rabin-Karp/)。一种基于哈希的更快的查询方法。
 - [最长相同子串](Longest%20Common%20Subsequence/)。在不同字符串中，找寻最长的相同部分。
-- [Z算法](Z-Algorithm/)。在字符串中找到所有具有特定排列模式的子串，并返回这些子串的起始位置下标。
+- [Z 算法](Z-Algorithm/)。在字符串中找到所有具有特定排列模式的子串，并返回这些子串的起始位置下标。
 
 ### 排序
 
-了解排序算法的实现是很有意思的，但在实际使用过程中你很少需要自己写排序流程。Swift 提供的 `sort()` 方法已经完全可以胜任这个工作了。但是如果你对实现感到好奇，那么请看...
+了解排序算法的实现是很有意思的，但在实际使用过程中你很少需要自己写排序流程。Swift 提供的 `sort()` 方法已经完全可以胜任这个工作了。但是如果你对实现感到好奇，那么请继续往下看...
 
 基础排序：
 
@@ -199,9 +199,9 @@ Most of the time using just the built-in `Array`, `Dictionary`, and `Set` types 
 - [Dijkstra's shortest path algorithm](Dijkstra%20Algorithm/)
 - [A-Star](A-Star/)
 
-## 谜题
+## 算法题
 
-A lot of software developer interview questions consist of algorithmic puzzles. Here is a small selection of fun ones. For more puzzles (with answers), see [here](http://elementsofprogramminginterviews.com/) and [here](http://www.crackingthecodinginterview.com).
+许多软件开发岗位的面试都有做算法题的环节。这里列举了一小部分有趣的题目。想找更多算法题（或答案）可以来[这里](http://elementsofprogramminginterviews.com/)和[这里](http://www.crackingthecodinginterview.com)。
 
 - [Two-Sum Problem](Two-Sum%20Problem/)
 - [Three-Sum/Four-Sum Problem](3Sum%20and%204Sum/)
@@ -233,7 +233,9 @@ Swift 算法俱乐部最初由 [Matthijs Hollemans](https://github.com/hollance)
 
 现在由 [Vincent Ngo](https://www.raywenderlich.com/u/jomoka)、 [Kelvin Lau](https://github.com/kelvinlauKL) 和 [Richard Ash](https://github.com/richard-ash) 共同维护。
 
-Swift 算法俱乐部是 [raywenderlich.com](https://www.raywenderlich.com) 社区中[大多数算法同好们](https://github.com/raywenderlich/swift-algorithm-club/graphs/contributors) 一起努力的成果。期待你的参与 —— [加入俱乐部](.github/CONTRIBUTING.md)? :]
+Swift 算法俱乐部是 [raywenderlich.com](https://www.raywenderlich.com) 社区中的[众多算法同好们](https://github.com/raywenderlich/swift-algorithm-club/graphs/contributors)一起努力的成果。期待你的参与 —— [加入俱乐部](.github/CONTRIBUTING.md)？:]
+
+本翻译页面由 [David Lee](https://github.com/davidleee) 创建与维护。
 
 ## 许可
 
