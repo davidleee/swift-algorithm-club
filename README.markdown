@@ -90,114 +90,114 @@
 
 ### 压缩
 
-- [Run-Length Encoding (RLE)](Run-Length%20Encoding/). Store repeated values as a single byte and a count.
-- [Huffman Coding](Huffman%20Coding/). Store more common elements using a smaller number of bits.
+- [游程编码（RLE）](Run-Length%20Encoding/)。将重复的数值保存为一个字节和一个个数标记。
+- [哈夫曼编码](Huffman%20Coding/)。用更少的比特位来保存更多常见元素。
 
 ### 混淆
 
-- [Shuffle](Shuffle/). Randomly rearranges the contents of an array.
-- [Comb Sort](Comb%20Sort/). An improve upon the Bubble Sort algorithm.
-- [Convex Hull](Convex%20Hull/).
-- [Miller-Rabin Primality Test](Miller-Rabin%20Primality%20Test/). Is the number a prime number?
-- [MinimumCoinChange](MinimumCoinChange/). A showcase for dynamic programming.
-- [Genetic](Genetic/). A simple example on how to slowly mutate a value to its ideal form, in the context of biological evolution.
-- [Myers Difference Algorithm](Myers%20Difference%20Algorithm/). Finding the longest common subsequence of two sequences.
+- [“洗牌”（Shuffle）](Shuffle/)。随机打乱一个数组。
+- [梳排序](Comb%20Sort/)。冒泡排序的优化版。
+- [凸包](Convex%20Hull/)。
+- [米勒-拉宾素性检验](Miller-Rabin%20Primality%20Test/)。这个数字是素数吗？
+- [最少硬币兑换](MinimumCoinChange/)。动态编程的一个示例。
+- [遗传算法](Genetic/)。参考生物进化理论实现的一个数值最佳化的简单例子。 A simple example on how to slowly mutate a value to its ideal form, in the context of biological evolution.
+- [Myers 差分算法](Myers%20Difference%20Algorithm/)。找寻两个序列中的最长相同子序列。
 
 ### 数学理论
 
-- [Greatest Common Divisor (GCD)](GCD/). Special bonus: the least common multiple.
-- [Permutations and Combinations](Combinatorics/). Get your combinatorics on!
-- [Shunting Yard Algorithm](Shunting%20Yard/). Convert infix expressions to postfix.
-- [Karatsuba Multiplication](Karatsuba%20Multiplication/). Another take on elementary multiplication.
-- [Haversine Distance](HaversineDistance/). Calculating the distance between 2 points from a sphere.
-- [Strassen's Multiplication Matrix](Strassen%20Matrix%20Multiplication/). Efficient way to handle matrix multiplication.
-- [CounterClockWise](/CounterClockWise/). Determining the area of a simple polygon.
+- [最大公约数（GCD）](GCD/)。附加奖励：最小公倍数。
+- [排列组合](Combinatorics/)。组合数学启动！
+- [调度场算法](Shunting%20Yard/)。将中缀表达式转换为后缀表达式的经典算法。
+- [卡拉楚巴算法](Karatsuba%20Multiplication/)。另一种快速乘法算法。
+- [半正矢公式](HaversineDistance/)。计算圆上两点距离的方式。
+- [施特拉森矩阵乘法](Strassen%20Matrix%20Multiplication/)。一种高效的矩阵乘法算法。
+- [逆时针算法](/CounterClockWise/)。计算简单多边形的面积。
 
 ### 机器学习
 
-- [k-Means Clustering](K-Means/). Unsupervised classifier that partitions data into *k* clusters.
-- k-Nearest Neighbors
-- [Linear Regression](Linear%20Regression/). A technique for creating a model of the relationship between two (or more) variable quantities.
-- Logistic Regression
-- Neural Networks
-- PageRank
-- [Naive Bayes Classifier](Naive%20Bayes%20Classifier/)
-- [Simulated annealing](Simulated%20annealing/). Probabilistic technique for approximating the global maxima in a (often discrete) large search space.
+- [k 平均算法](K-Means/)。把点划分到 k 个聚类中的算法。
+- k 邻近算法
+- [线性回归](Linear%20Regression/)。对一个（或多个）变量之间关系进行建模的一种回归分析。
+- 逻辑回归
+- 神经网络
+- 网页排名算法
+- [朴素贝叶斯分类器](Naive%20Bayes%20Classifier/)
+- [模拟退火](Simulated%20annealing/)。一种在很大搜寻空间中寻找近似最优解的通用概率算法。
 
 ## 数据结构
 
-The choice of data structure for a particular task depends on a few things.
+为特定任务挑选合适的数据结构取决于下面几件事情。
 
-First, there is the shape of your data and the kinds of operations that you'll need to perform on it. If you want to look up objects by a key you need some kind of dictionary; if your data is hierarchical in nature you want a tree structure of some sort; if your data is sequential you want a stack or queue.
+第一，数据组成形式选择与你使用它们的方式相关。如果你想通过关键字去查找对象，那么你需要一个字典（dictionary）；如果你的数据可以被组成上下级，那么你大概会用到某种树型结构；如果你的数据是有序的，那么也许栈或队列更适合你。
 
-Second, it matters what particular operations you'll be performing most, as certain data structures are optimized for certain actions. For example, if you often need to find the most important object in a collection, then a heap or priority queue is more optimal than a plain array.
+第二，考虑最频繁的使用方式是什么，因为某些数据结构是针对特定动作进行过优化的。比方说，如果你经常要在某个集合里找到最重要的某个元素，那么堆或者优先队列会比一个普通的数组性能更好。
 
-Most of the time using just the built-in `Array`, `Dictionary`, and `Set` types is sufficient, but sometimes you may want something more fancy...
+大多数时候，使用内置的 `Array`、`Dictonary` 和 `Set` 已经足够了，但有些时候你可能想要用一些更酷炫的方式...
 
 ### 数组的各种变形
 
-- [Array2D](Array2D/). A two-dimensional array with fixed dimensions. Useful for board games.
-- [Bit Set](Bit%20Set/). A fixed-size sequence of *n* bits.
-- [Fixed Size Array](Fixed%20Size%20Array/). When you know beforehand how large your data will be, it might be more efficient to use an old-fashioned array with a fixed size.
-- [Ordered Array](Ordered%20Array/). An array that is always sorted.
-- [Rootish Array Stack](Rootish%20Array%20Stack/). A space and time efficient variation on Swift arrays.
+- [二维数组](Array2D/)。一种维度固定的二维数组。棋牌类游戏中常常会用到。
+- [比特位集合](Bit%20Set/)。 一种保存了 *n* 个比特位的定长序列。
+- [定长数组](Fixed%20Size%20Array/)。当你提前知道要存储的数据长度时，用复古的固定长度的数组也许会更加高效。
+- [有序数组](Ordered%20Array/)。一种一直保持某种顺序的数组。
+- [Rootish Array Stack](Rootish%20Array%20Stack/)。一种时间和空间上都更高效的 Swift 数组变体。
 
 ### 队列
 
-- [Stack](Stack/). Last-in, first-out!
-- [Queue](Queue/). First-in, first-out!
-- [Deque](Deque/). A double-ended queue.
-- [Priority Queue](Priority%20Queue). A queue where the most important element is always at the front.
-- [Ring Buffer](Ring%20Buffer/). Also known as a circular buffer. An array of a certain size that conceptually wraps around back to the beginning.
+- [栈](Stack/)。后进，先出！
+- [队列](Queue/)。先进，先出！
+- [双端队列](Deque/)。一种有两个出入口的队列。
+- [优先队列](Priority%20Queue)。一种确保最重要的元素永远在最前面的队列。
+- [环形缓冲区](Ring%20Buffer/)。也叫循环缓冲区。一种有固定长度且首尾相接的数组。
 
 ### 链表
 
-- [Linked List](Linked%20List/). A sequence of data items connected through links. Covers both singly and doubly linked lists.
-- [Skip-List](Skip-List/). Skip List is a probabilistic data-structure with same logarithmic time bound and efficiency as AVL/ or Red-Black tree and provides a clever compromise to efficiently support search and update operations.
+- [链表](Linked%20List/)。一组通过链接组合在一起的数据元素。包括单向和双向链表。
+- [跳跃列表](Skip-List/)。一种基于概率的数据结构，与 AVL 数和红黑树有相同的算法时间复杂度，并且能很好地平衡搜索和数据更新上的效率。
 
 ### 树
 
-- [Tree](Tree/). A general-purpose tree structure.
-- [Binary Tree](Binary%20Tree/). A tree where each node has at most two children.
-- [Binary Search Tree (BST)](Binary%20Search%20Tree/). A binary tree that orders its nodes in a way that allows for fast queries.
-- [Red-Black Tree](Red-Black%20Tree/). A self balancing binary search tree.
-- [Splay Tree](Splay%20Tree/). A self balancing binary search tree that enables fast retrieval of recently updated elements.
-- [Threaded Binary Tree](Threaded%20Binary%20Tree/). A binary tree that maintains a few extra variables for cheap and fast in-order traversals.
-- [Segment Tree](Segment%20Tree/). Can quickly compute a function over a portion of an array.
-  - [Lazy Propagation](https://github.com/raywenderlich/swift-algorithm-club/tree/master/Segment%20Tree/LazyPropagation)
-- kd-Tree
-- [Sparse Table](Sparse%20Table/). Another take on quickly computing a function over a portion of an array, but this time we'll make it even quicker!.
-- [Heap](Heap/). A binary tree stored in an array, so it doesn't use pointers. Makes a great priority queue.
-- Fibonacci Heap
-- [Trie](Trie/). A special type of tree used to store associative data structures.
-- [B-Tree](B-Tree/). A self-balancing search tree, in which nodes can have more than two children.
-- [QuadTree](QuadTree/). A tree with 4 children.
-- [Octree](Octree/). A tree with 8 children.
+- [树](Tree/)。一种常规概念上的树型结构。
+- [二叉树](Binary%20Tree/)。一种每个节点最多只能有两个子节点的树。
+- [二叉搜索树（BST）](Binary%20Search%20Tree/)。一种经过特殊排序的二叉树，能用于更快速的查询。
+- [红黑树](Red-Black%20Tree/)。一种自平衡的二叉搜索树。
+- [伸展树](Splay%20Tree/)。一种自平衡的二叉搜索树，能快速找回最近更新的元素。
+- [线索二叉树](Threaded%20Binary%20Tree/)。一种维护了少量额外变量的二叉树，能在节点间进行快速的有序移动。
+- [线段树](Segment%20Tree/)。可以快速查询结构内包含某一点的所有区间。
+  - [惰性传播](https://github.com/raywenderlich/swift-algorithm-club/tree/master/Segment%20Tree/LazyPropagation)
+- kd 树
+- [稀疏表](Sparse%20Table/)。与线段树的功效相同，但这次会更快！
+- [堆](Heap/)。一种以数组形式保存的二叉树，所以它不需要用到指针。是一种很好的优先队列。
+- 斐波那契堆
+- [前缀树](Trie/)。一种用于保存关联数据结构的特殊的树。
+- [B 树](B-Tree/)。一种自平衡搜索树，每个节点可以拥有2个以上的子节点。
+- [四叉树](QuadTree/)。每个节点正好有4个子节点的树。
+- [八叉树](Octree/)。每个节点正好有8个子节点的树。
 
 ### 哈希
 
-- [Hash Table](Hash%20Table/). Allows you to store and retrieve objects by a key. This is how the dictionary type is usually implemented.
-- Hash Functions
+- [哈希表](Hash%20Table/)。让你能够用关键字来存取对象。字典通常就是基于哈希表实现的。
+- 散列函数
 
 ### 集合
 
-- [Bloom Filter](Bloom%20Filter/). A constant-memory data structure that probabilistically tests whether an element is in a set.
-- [Hash Set](Hash%20Set/). A set implemented using a hash table.
-- [Multiset](Multiset/). A set where the number of times an element is added matters. (Also known as a bag.)
-- [Ordered Set](Ordered%20Set/). A set where the order of items matters.
+- [布隆过滤器](Bloom%20Filter/)。一种占用固定内存的数据结构，用于检索一个元素是否在一个集合中。
+- [哈希集合](Hash%20Set/)。一种基于哈希表实现的集合。
+- [多重集](Multiset/)。一种允许同一元素出现多次的集合，也叫做“包”。
+- [有序集合](Ordered%20Set/)。一种有序的集合。
 
 ### 图
 
-- [Graph](Graph/)
-- [Breadth-First Search (BFS)](Breadth-First%20Search/)
-- [Depth-First Search (DFS)](Depth-First%20Search/)
-- [Shortest Path](Shortest%20Path%20%28Unweighted%29/) on an unweighted tree
-- [Single-Source Shortest Paths](Single-Source%20Shortest%20Paths%20(Weighted)/)
-- [Minimum Spanning Tree](Minimum%20Spanning%20Tree%20%28Unweighted%29/) on an unweighted tree
-- [Minimum Spanning Tree](Minimum%20Spanning%20Tree/)
-- [All-Pairs Shortest Paths](All-Pairs%20Shortest%20Paths/)
-- [Dijkstra's shortest path algorithm](Dijkstra%20Algorithm/)
-- [A-Star](A-Star/)
+- [图](Graph/)
+- [广度优先搜索（BFS）](Breadth-First%20Search/)
+- [深度优先搜索（DFS）](Depth-First%20Search/)
+- [最短路径](Shortest%20Path%20%28Unweighted%29/)，在非平衡树上实现。
+- [单源最短路径](Single-Source%20Shortest%20Paths%20(Weighted)/)
+- [最小生成树](Minimum%20Spanning%20Tree%20%28Unweighted%29/)，在非平衡树上实现。
+- [最小生成树](Minimum%20Spanning%20Tree/)
+- [任意两点之间的最短路径](All-Pairs%20Shortest%20Paths/)
+- [迪杰斯特拉算法](Dijkstra%20Algorithm/)
+- [A*算法](A-Star/)
 
 ## 算法题
 
@@ -215,17 +215,17 @@ Most of the time using just the built-in `Array`, `Dictionary`, and `Set` types 
 
 ## 继续学习！
 
-Like what you see? Check out [Data Structures & Algorithms in Swift](https://store.raywenderlich.com/products/data-structures-and-algorithms-in-swift), the official book by the Swift Algorithm Club team!
+对上面的内容还满意吗？那就来看看 [Data Structures & Algorithms in Swift](https://store.raywenderlich.com/products/data-structures-and-algorithms-in-swift)，这是 Swift 算法俱乐部团队官方出版的书籍。
 
 ![Data Structures & Algorithms in Swift Book](Images/DataStructuresAndAlgorithmsInSwiftBook.png)
 
-You’ll start with the fundamental structures of linked lists, queues and stacks, and see how to implement them in a highly Swift-like way. Move on to working with various types of trees, including general purpose trees, binary trees, AVL trees, binary search trees, and tries. 
+你会从基础的数据结构开始，例如链表、队列、栈，学习如何用 Swift 的语法形式来实现它们。接着会学习各种类型的树结构，包括一些具有特定目标的树，比如二叉树、AVL 树、二叉搜索树和前缀树。
 
-Go beyond bubble and insertion sort with better-performing algorithms, including mergesort, radix sort, heap sort, and quicksort. Learn how to construct directed, non-directed and weighted graphs to represent many real-world models, and traverse graphs and trees efficiently with breadth-first, depth-first, Dijkstra’s and Prim’s algorithms to solve problems such as finding the shortest path or lowest cost in a network.
+你还能看到一些比冒泡排序和插入排序性能更好的算法，比如归并排序、基数排序、堆排序和快速排序。你还可以学习到：如何构造有向、无向和加权图，用以表示现实世界中的模型；使用广度优先、深度优先、迪杰斯特拉和普林姆算法来高效地翻转图或树，用以解决类似最短路径或最低成本网络的问题。
 
-By the end of this book, you’ll have hands-on experience solving common issues with data structures and algorithms — and you’ll be well on your way to developing your own efficient and useful implementations!
+读完这本书，你就拥有了使用数据结构和算法解决常见问题的实操经验，而且你还拥有了创造属于自己的高效算法的能力。
 
-You can find the book on the [raywenderlich.com store](https://store.raywenderlich.com/products/data-structures-and-algorithms-in-swift).
+你可以在 [raywenderlich.com 商城](https://store.raywenderlich.com/products/data-structures-and-algorithms-in-swift)里找到这本书。
 
 ## 鸣谢
 
