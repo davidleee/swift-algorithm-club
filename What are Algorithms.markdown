@@ -1,18 +1,18 @@
-# What are algorithms and data structures?
+# 什么是算法和数据结构？
 
-An algorithm is a recipe for making the computer do something. If you know how to cook, you understand algorithms!
+算法，其实就是让电脑去做特定事情的一份“食谱”。如果你会做饭，你就已经知道什么是算法了！
 
-Here's a [recipe for pancakes](http://allrecipes.com/recipe/21014/good-old-fashioned-pancakes/):
+这是一份[薄饼的制作食谱](http://allrecipes.com/recipe/21014/good-old-fashioned-pancakes/)：
 
-1. In a large bowl, sift together flour, baking powder, salt and sugar.
-2. Pour in the milk, egg, and melted butter.
-3. Mix until smooth.
-4. Heat a frying pan over medium heat.
-5. Scoop the batter into the pan, using approximately 1/4 cup for each pancake.
-6. Brown the pancake on both sides.
+1. 准备一个大碗，将面粉、发酵粉过筛，并加入盐和糖
+2. 倒入牛奶、鸡蛋和融化了的黄油
+3. 搅拌至顺滑的面糊状
+4. 用中火预热平底锅
+5. 将刚才的面糊舀至平底锅，只需要 1/4 的量就足够做出一张薄饼
+6. 将薄饼的两面煎至金黄
 
-The recipe consists of a series of steps that you perform one after the other. An algorithm is just like that, except that it contains instructions for a computer to perform, not for a cook.
+食谱由一个接一个的步骤组成。算法也是这样，不过它的步骤是给计算机，而不是厨师，去执行的。
 
-The ingredients -- flour, milk, eggs, butter -- are the data that the algorithm works on. The data goes into the algorithm in one form (raw, separate ingredients) and comes out in another (delicious pancakes!).
+食谱里的配方，比如面粉、牛奶、鸡蛋、黄油，就是算法要操作的数据。数据以一种形态（各种原材料）输入到算法中，然后以另一种形态（好吃的薄饼）被输出出来。
 
-So what are the data structures? They are the containers that hold the data while the algorithm works on it. In the pancake recipe, the data structures are the bag that holds the flour, the mixing bowl where you combine everything, the frying pan that browns the pancake, and finally the plate used to serve the finished pancake.
+那么什么数据结构呢？它们是算法在操作数据时使用的容器。在薄饼的食谱里，数据结构就相当于用来存放面粉的袋子、用来混合面糊的大碗、用来煎薄饼的平底锅，还有最后用来上菜的碟子。
