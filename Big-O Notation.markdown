@@ -1,21 +1,21 @@
-# A note on Big-O notation
+# 关于大 O 标记法的笔记
 
-It's useful to know how fast an algorithm is and how much space it needs. This allows you to pick the right algorithm for the job.
+了解一个算法有多快或需要占用多少空间是很有用的。这能帮助你选择到合适的算法。
 
-Big-O notation gives you a rough indication of the running time of an algorithm and the amount of memory it uses. When someone says, "This algorithm has worst-case running time of **O(n^2)** and uses **O(n)** space," they mean it's kinda slow but doesn't need lots of extra memory.
+大 O 标记法能让你对一个算法的运行时间和所需空间有一个粗略的了解。当别人说“这个算法最坏情况下的时间复杂度是 **O(n^2)** 并且会占用 **O(n)** 的空间”，他们的意思是这个算法比较慢但消耗的内存不多。
 
-Figuring out the Big-O of an algorithm is usually done through mathematical analysis. We're skipping the math here, but it's useful to know what the different values mean, so here's a handy table. **n** refers to the number of data items that you're processing. For example, when sorting an array of 100 items, **n = 100**.
+算法复杂度通常是经过数学分析得出来的。我们会跳过这里面的数学部分，但了解不同数值表示什么意思是很有用的，所以这里有一张简单的对照表。**n** 表示你要处理的数据元素的个数。比如说，当你要对一个含有100个元素的数组进行排序时，**n = 100**。
 
-Big-O | Name | Description
+算法复杂度 | 别名 | 描述
 ------| ---- | -----------
-**O(1)** | constant | **This is the best.** The algorithm always takes the same amount of time, regardless of how much data there is. Example: looking up an element of an array by its index.
-**O(log n)** | logarithmic | **Pretty great.** These kinds of algorithms halve the amount of data with each iteration. If you have 100 items, it takes about 7 steps to find the answer. With 1,000 items, it takes 10 steps. And 1,000,000 items only take 20 steps. This is super fast even for large amounts of data. Example: binary search.
-**O(n)** | linear | **Good performance.** If you have 100 items, this does 100 units of work. Doubling the number of items makes the algorithm take exactly twice as long (200 units of work). Example: sequential search.
-**O(n log n)** | "linearithmic" | **Decent performance.** This is slightly worse than linear but not too bad. Example: the fastest general-purpose sorting algorithms.
-**O(n^2)** | quadratic | **Kinda slow.** If you have 100 items, this does 100^2 = 10,000 units of work. Doubling the number of items makes it four times slower (because 2 squared equals 4). Example: algorithms using nested loops, such as insertion sort.
-**O(n^3)** | cubic | **Poor performance.** If you have 100 items, this does 100^3 = 1,000,000 units of work. Doubling the input size makes it eight times slower. Example: matrix multiplication.
-**O(2^n)** | exponential | **Very poor performance.** You want to avoid these kinds of algorithms, but sometimes you have no choice. Adding just one bit to the input doubles the running time. Example: traveling salesperson problem.
-**O(n!)** | factorial | **Intolerably slow.** It literally takes a million years to do anything.  
+**O(1)** | 常量级 | **这是最优的。**这个算法总是用相同的时间完成，不管数据量有多少。例子：通过下标在数组中查找一个元素。
+**O(log n)** | 对数级 | **非常好。**这类算法每次迭代需要处理的数据量都会减半。如果你有100个数据元素，只需要7步就能找到正确答案。如果有1000个元素，则需要10步。如果是10000个元素，也只要20步。这是就算在数据量很大的情况下也是非常非常快的。例子：二分查找。
+**O(n)** | 线性级 | **性能不错。**假设有100个数据元素，这个算法就需要100个单位的时间去计算。当数据量翻倍，它所需要的计算时间也会正好翻倍（200个单位的时间）。例子：顺序查找。
+**O(n log n)** | "线性代数级" | **性能还行。**比线性级差一点，但是也不会太多。例子：常用的排序算法里最快的那些。
+**O(n^2)** | 平方级 | **稍微有点慢了。**假设有100个数据元素，这个算法需要 100^2 = 10,000 个单位的时间去计算。当数据量翻倍，它所需要的计算时间会翻4倍（因为 2^2 = 4）。例子：用了多重循环的算法，比如插入排序。
+**O(n^3)** | 次方级 | **性能较差。**假设有100个数据元素，这个算法就需要 100^3 = 1,000,000 个单位的时间去计算。当数据量翻倍，它所需要的计算时间会翻8倍。例子：矩阵乘法。
+**O(2^n)** | 指数级 | **性能很差。**除非不可避免，你一般不会想用这些算法。增加哪怕一个数据元素都会让花费时间翻倍。例子：旅行商问题。
+**O(n!)** | 阶乘级 | **慢得无法容忍。**它做什么都慢出天际。
 
 
 
@@ -23,17 +23,17 @@ Big-O | Name | Description
 
 
 
-Below are some examples for each category of performance:
+下面是每种算法复杂度的比较形象的例子：
 
 **O(1)**
 
-  The most common example with O(1) complexity is accessing an array index.
+  最常见的 O(1) 复杂度的例子就是访问数组的下标。
 
   ```swift
   let value = array[5]
   ```
 
-  Another example of O(1) is pushing and popping from Stack.
+  还有一个 O(1) 的例子是压栈和出栈。
 
 
 **O(log n)**
@@ -46,9 +46,9 @@ Below are some examples for each category of performance:
   }
   ```  
 
-  Instead of simply incrementing, 'j' is increased by 2 times itself in each run.
+  ‘J’ 不是简单的加1，而是在每个循环里都翻倍。
 
-  Binary Search Algorithm is an example of O(log n) complexity.
+  二分查找算法就是 O(log n) 复杂度的常见例子。
 
 
 **O(n)**
@@ -59,7 +59,7 @@ Below are some examples for each category of performance:
   }
   ```
 
-  Array Traversal and Linear Search are examples of O(n) complexity.  
+  数组反转和线性查找就是 O(n) 复杂度的。
 
 
 **O(n log n)**
@@ -87,7 +87,7 @@ Below are some examples for each category of performance:
   }
   ```
 
-  Merge Sort and Heap Sort are examples of O(n log n) complexity.  
+  归并排序和堆排序就是 O(n log n) 复杂度的。
 
 
 **O(n^2)**
@@ -101,6 +101,7 @@ Below are some examples for each category of performance:
   ```
 
   Traversing a simple 2-D array and Bubble Sort are examples of O(n^2) complexity.
+  翻转二维数组和冒泡排序就是 O(n^2) 复杂度的.
 
 
 **O(n^3)**
@@ -117,8 +118,8 @@ Below are some examples for each category of performance:
 
 **O(2^n)**
 
-  Algorithms with running time O(2^N) are often recursive algorithms that solve a problem of size N by recursively solving two smaller problems of size N-1.
-  The following example prints all the moves necessary to solve the famous "Towers of Hanoi" problem for N disks.
+  复杂是 O(2^n) 的算法通常都是用递归去求解的，换句话说，要解决 N 个数据量的问题，需要先递归解决 N-1 个数据量时的问题。
+  下面的例子展示了一个有 N 个碟片的汉诺塔问题的解法。
 
   ```swift
   func solveHanoi(n: Int, from: String, to: String, spare: String) {
@@ -133,7 +134,7 @@ Below are some examples for each category of performance:
 
 **O(n!)**
 
-  The most trivial example of function that takes O(n!) time is given below.
+  下面是一个 O(n!) 复杂度方法的例子。
 
   ```swift
   func nFactFunc(n: Int) {
@@ -143,8 +144,9 @@ Below are some examples for each category of performance:
   }
   ```
 
-Often you don't need math to figure out what the Big-O of an algorithm is but you can simply use your intuition. If your code uses a single loop that looks at all **n** elements of your input, the algorithm is **O(n)**. If the code has two nested loops, it is **O(n^2)**. Three nested loops gives **O(n^3)**, and so on.
+一般来说，在做很多数学计算之前，你就可以凭直觉感受出一个算法的复杂度。如果你的代码用到了一个单层循环去处理 **n** 个元素，那么它的算法复杂度就是 **O(n)**。如果代码里有一层循环嵌套在另一层里面，那么它的算法复杂度就是 **O(n^2)**。三层嵌套的循环的算法复杂度是 **O(n^3)**，以此类推。
 
-Note that Big-O notation is an estimate and is only really useful for large values of **n**. For example, the worst-case running time for the [insertion sort](Insertion%20Sort/) algorithm is **O(n^2)**. In theory that is worse than the running time for [merge sort](Merge%20Sort/), which is **O(n log n)**. But for small amounts of data, insertion sort is actually faster, especially if the array is partially sorted already!
+值得注意的是，大 O 标记法是一种估算方式，它只适用于数据量很大的情况。比如说，[插入排序](Insertion%20Sort/)在最坏情况下的算法复杂度是 **O(n^2)**。
+理论上，这比[归并排序](Merge%20Sort/) **O(n log n)** 的复杂度更高。然而对于较小的数据量来说，插入排序是更快的，当数组部分有序的时候更是如此。
 
-If you find this confusing, don't let this Big-O stuff bother you too much. It's mostly useful when comparing two algorithms to figure out which one is better. But in the end you still want to test in practice which one really is the best. And if the amount of data is relatively small, then even a slow algorithm will be fast enough for practical use.
+如果你觉得不太理解，那也别让大 O 标记法阻碍了你的脚步。它在对比两个算法优劣的时候还算有用。但最终你还是要在实际情况下去测试它们的性能。而且，如果数据量相对较小，那就算是一个慢一点的算法也相当够用了。
