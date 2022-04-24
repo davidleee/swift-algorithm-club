@@ -28,7 +28,7 @@
 
 如果你刚刚入门算法和数据结构，可以先从下面几个知识点开始了解：
 
-- [堆栈](Stack/)
+- [栈](Stack/)
 - [队列](Queue/)
 - [插入排序](Insertion%20Sort/)
 - [二分查找](Binary%20Search/) 和 [二分查找树](Binary%20Search%20Tree/)
