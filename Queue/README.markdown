@@ -116,7 +116,6 @@ queue.enqueue("Tim")
  
 在内存中移动所有这些元素是一个 **O(n)** 复杂度的操作。所以在我们的简易队列里，入队列是高效的，但出队列的效率就有待加强了。
 
-## A more efficient queue
 ## 一种更高效的出队列方式
 
 为了让出队列更高效，我们可以像上面提到的那样预留一些空间，不过这次是给数组的开头留。这个逻辑需要我们自己实现，因为 Swift 自己的数组没有这个功能。
@@ -133,7 +132,6 @@ queue.enqueue("Tim")
 
 	[ "Tim", "Grace", xxx, xxx, xxx, xxx ]
 
-This trimming procedure involves shifting memory which is an **O(n)** operation. Because this only happens once in a while, dequeuing is **O(1)** on average.
 这个裁剪依然是一个 **O(n)** 复杂度的操作。但因为你只是偶尔给它来上这么一下，所以平均下来，出队列还是 **O(1)** 复杂度的。
 
 下面是这个新版本的队列实现：
@@ -261,6 +259,6 @@ q.count             // 1
 
 创建队列的方式有很多中。其他的实现还可以是基于[链表](../Linked%20List/)、[环形缓冲区](../Ring%20Buffer/)或者[堆](../Heap/)的。
 
-[双向队列](../Deque/)是这个主题的一种变体，你可以从它的两端进行出队列和入队列操作；还有[优先队列](../Priority%20Queue/)，一种有序的、最重要元素永远在队头的队列。
+[双端队列](../Deque/)是这个主题的一种变体，你可以从它的两端进行出队列和入队列操作；还有[优先队列](../Priority%20Queue/)，一种有序的、最重要元素永远在队头的队列。
 
 *原文出自 Matthijs Hollemans*
