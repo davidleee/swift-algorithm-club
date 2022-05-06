@@ -1,20 +1,20 @@
-# Linear Search
+# 线性查找
 
-Goal: Find a particular value in an array.
+目标：在数组中找出指定的值。
 
-We have an array of generic objects. With linear search, we iterate over all the objects in the array and compare each one to the object we're looking for. If the two objects are equal, we stop and return the current array index. If not, we continue to look for the next object as long as we have objects in the array.
+假设我们有一个由普通对象组成的数组。如果用线性查找的话，我们需要遍历数组中的所有对象，并把它们逐个与我们想要找到的对象进行比较。如果比较的结果是相同的，那我们就停下来并返回当前的数组下标。如果不同，我们就继续与下一个对象比较，直到数组里的全部对象都被比较过了。
 
-## An example
+## 一个例子
 
-Let's say we have an array of numbers `[5, 2, 4, 7]` and we want to check if the array contains the number `2`.
+假设我们有一个数字组成的数组 `[5, 2, 4, 7]`，然后我们想要看看数字 `2` 在不在数组里。
 
-We start by comparing the first number in the array, `5`, to the number we're looking for, `2`. They are obviously not the same, and so we continue to the next array element.
+我们把数组中的第一个元素 `5` 拿来跟我们要找的数字 `2` 进行比较。显然它们是不同的，所以我们继续拿数组里的下一个元素出来比较。
 
-We compare the number `2` from the array to our number `2` and notice they are equal. Now we can stop our iteration and return 1, which is the index of the number `2` in the array.
+我们把数组里的 `2` 和我们的目标数字 `2` 进行比较，然后发现它们是一样的。于是我们就可以停止遍历并返回 1，也就是 `2` 在数组里的下标。
 
-## The code
+## 代码
 
-Here is a simple implementation of linear search in Swift:
+下面是用 Swift 实现的线性查找：
 
 ```swift
 func linearSearch<T: Equatable>(_ array: [T], _ object: T) -> Int? {
@@ -25,21 +25,21 @@ func linearSearch<T: Equatable>(_ array: [T], _ object: T) -> Int? {
 }
 ```
 
-Put this code in a playground and test it like so:
+把代码放进 playground 就可以这样验证它：
 
 ```swift
 let array = [5, 2, 4, 7]
-linearSearch(array, 2) 	// This will return 1
+linearSearch(array, 2) 	// 这会返回 1
 ```
 
-## Performance
+## 性能
 
-Linear search runs at **O(n)**. It compares the object we are looking for with each object in the array and so the time it takes is proportional to the array length. In the worst case, we need to look at all the elements in the array.
+线性查找的时间复杂度是 **O(n)**。因为它把数组里的每一个元素都拿来与目标对象进行比较，所以它花费的时间与数组的长度成正比。在最坏的情况下，我们需要遍历数组里的全部元素。
 
-The best-case performance is **O(1)** but this case is rare because the object we're looking for has to be positioned at the start of the array to be immediately found. You might get lucky, but most of the time you won't. On average, linear search needs to look at half the objects in the array.
+最佳情况下的时间复杂度是 **O(1)**，但这种情况太少见了，因为这意味着我们要找的对象正好位于数组的最开头。运气好的时候可能会碰到，然而大多数时候你不会那么好运。平均情况，线性查找需要遍历数组里的一半对象。
 
-## See also
+## 相关信息
 
-[Linear search on Wikipedia](https://en.wikipedia.org/wiki/Linear_search)
+[维基百科上的线性查找](https://en.wikipedia.org/wiki/Linear_search)
 
-*Written by [Patrick Balestra](http://www.github.com/BalestraPatrick)*
+*原文出自 [Patrick Balestra](http://www.github.com/BalestraPatrick)*
