@@ -100,8 +100,7 @@
   }
   ```
 
-  Traversing a simple 2-D array and Bubble Sort are examples of O(n^2) complexity.
-  翻转二维数组和冒泡排序就是 O(n^2) 复杂度的.
+  遍历二维数组和冒泡排序就是 O(n^2) 复杂度的.
 
 
 **O(n^3)**
