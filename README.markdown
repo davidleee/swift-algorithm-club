@@ -51,7 +51,7 @@
 ### 字符串搜索
 
 - [穷举法](Brute-Force%20String%20Search/)。一种简单直白的方法。
-- [摩尔算法](Boyer-Moore-Horspool/)。一种快速搜索子串的方法。它借助一张查询表来跳过某些字符，从而避免对每个字符都进行处理。
+- [摩尔字符串搜索](Boyer-Moore-Horspool/)。一种快速搜索子串的方法。它借助一张查询表来跳过某些字符，从而避免对每个字符都进行处理。
 - [KMP 算法](Knuth-Morris-Pratt/)。一种有着线性时间复杂度的算法，可以返回给定规律的子串的出现下标。
 - [Rabin-Karp 算法](Rabin-Karp/)。一种基于哈希的更快的查询方法。
 - [最长相同子串](Longest%20Common%20Subsequence/)。在不同字符串中，找寻最长的相同部分。
