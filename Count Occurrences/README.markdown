@@ -1,25 +1,25 @@
-# Count Occurrences
+# 计算出现次数
 
-Goal: Count how often a certain value appears in an array.
+目标：计算特定数值在一个数组里出现过多少次。
 
-The obvious way to do this is with a [linear search](../Linear%20Search/) from the beginning of the array until the end, keeping count of how often you come across the value. That is an **O(n)** algorithm.
+最明显的方式就是从头到尾给数组做一个[线性查找](../Linear%20Search/)，然后记录下你遇见过这个数值多少次。这是一个 **O(n)** 复杂度的算法。
 
-However, if the array is sorted you can do it much faster, in **O(log n)** time, by using a modification of [binary search](../Binary%20Search/).
+然而，如果数组是有序的话你就能找得更快，使用一种调整过的[二分查找](../Binary%20Search/)可以在 **O(log n)** 的时间里完成。
 
-Let's say we have the following array:
+假设我们有下面这样的数组：
 
 	[ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 
-If we want to know how often the value `3` occurs, we can do a regular binary search for `3`. That could give us any of these four indices:
+如果我们想知道数字 `3` 出现了几次，我们可以用常规的二分查找去找 `3`。那可能会返回我们下面这4个索引：
 
 	[ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 	           *  *  *  *
 
-But that still doesn't tell you how many other `3`s there are. To find those other `3`s, you'd still have to do a linear search to the left and a linear search to the right. That will be fast enough in most cases, but in the worst case -- when the array consists of nothing but `3`s -- it still takes **O(n)** time.
+但这还是没能告诉你这个索引以外的其他地方有多少 `3`。为了找到这些其他的 `3`，你还需要分别往左和往右进行一次线性查找。这在大多数情况下已经够快了，但在最坏情况下——当这个数组里只有一堆 `3` 没有其他数字的时候——它还是需要 **O(n)** 的时间。
 
-The trick is to use two binary searches, one to find where the `3`s start (the left boundary), and one to find where they end (the right boundary).
+这个技巧在于使用两个二分查找，一个用来找 `3` 的起始位置（左边界），一个用来找它的结束位置（右边界）。
 
-In code this looks as follows:
+用代码来描述是这样的：
 
 ```swift
 func countOccurrences<T: Comparable>(of key: T, in array: [T]) -> Int {
@@ -55,47 +55,49 @@ func countOccurrences<T: Comparable>(of key: T, in array: [T]) -> Int {
 }
 ```
 
-Notice that the variables `leftBoundary` and `rightBoundary` are very similar to the [binary search](../Binary%20Search/) algorithm. The big difference is that they don't stop when they find the search key, but keep going.  Also, notice that we constrain the type `T` to be Comparable so that the algorithm can be applied to an array of Strings, Ints or other types that conform to the Swift Comparable protocol.
+注意变量 `leftBoundary` 和 `rightBoundary` 跟[二分查找](../Binary%20Search/)算法是很像的。最大的区别在于它们不会在找到搜索关键字的时候就停下来，而是继续找下去。而且，留意我们把 `T` 约束为遵循 Comparable 的类型，这样算法才能被用于比较字符串、整型或者其他任何遵循 Swift 中 Comparable 协议的类型。
 
-To test this algorithm, copy the code to a playground and then do:
+为了验证算法的可行性，把代码复制到 playground 然后这样做：
 
 ```swift
 let a = [ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 
-countOccurrences(of: 3, in: a)  // returns 4
+countOccurrences(of: 3, in: a)  // 返回 4
 ```
 
-> **Remember:** If you use your own array, make sure it is sorted first!
+> **切记：** 如果你用的是自己构建的数组，必须先确保它已经是有序的！
 
-Let's walk through the example. The array is:
+让我们逐步讲解上面的例子。数组是这个：
 
 	[ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 
-To find the left boundary, we start with `low = 0` and `high = 12`. The first mid index is `6`:
+为了找到左边界，我们从 `low = 0` 和 `high = 12` 开始。第一个中位下标是 `6`：
 
 	[ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 	                    *
 
-With a regular binary search you'd be done now, but here we're not just looking whether the value `3` occurs or not -- instead, we want to find where it occurs *first*.
+常规的二分查找现在就可以结束了，但我们现在不是为了判断 `3` 的存在与否，而是想要知道它*最先*出现在哪里。
 
-Since this algorithm follows the same principle as binary search, we now ignore the right half of the array and calculate the new mid index:
+因为这个算法也遵循二分查找的原则，所以我们接下来会忽略掉数组的右半边，并重新计算一个新的中位下标：
 
 	[ 0, 1, 1, 3, 3, 3 | x, x, x, x, x, x ]
 	           *
 
-Again, we've landed on a `3`, and it's the very first one. But the algorithm doesn't know that, so we split the array again:
+我们又一次找到了 `3`，而且它就是最先出现的那个。但是算法并不知道这一点，所以我们继续拆分数组：
 
 	[ 0, 1, 1 | x, x, x | x, x, x, x, x, x ]
 	     *
 
-Still not done. Split again, but this time use the right half:
+还没完。继续拆分，但这次用到是右半边：
 
 	[ x, x | 1 | x, x, x | x, x, x, x, x, x ]
 	         *
 
-The array cannot be split up any further, which means we've found the left boundary, at index 3.
+数组已经没法继续拆分了，说明我们已经找到左边界了，也就是下标为 3 的位置。
 
-Now let's start over and try to find the right boundary. This is very similar, so I'll just show you the different steps:
+> **译者注：** 这个下标位置和图示位置是不一致的，因为在得出中位下标之后，还会再执行一次 `low = midIndex + 1` 才把 `low` 的值返回出来。
+
+现在我们重来一次，并尝试找出右边界。这个过程很相似，所以下面就只展示中位下标是怎么移动的：
 
 	[ 0, 1, 1, 3, 3, 3, 3, 6, 8, 10, 11, 11 ]
 	                    *
@@ -109,12 +111,14 @@ Now let's start over and try to find the right boundary. This is very similar, s
 	[ x, x, x, x, x, x, x | 6 | x | x, x, x ]
 	                        *
 
-The right boundary is at index 7. The difference between the two boundaries is 7 - 3 = 4, so the number `3` occurs four times in this array.
+> **译者注：** 注意这次下标位置和图示位置就一样了，因为这次得出最后的中位下标之后，会落入 `if a[midIndex] > key` 的判断里，所以没有改变 `low` 的值。
 
-Each binary search took 4 steps, so in total this algorithm took 8 steps. Not a big gain on an array of only 12 items, but the bigger the array, the more efficient this algorithm becomes. For a sorted array with 1,000,000 items, it only takes 2 x 20 = 40 steps to count the number of occurrences for any particular value.
+右边界在下标为7的位置。左右边界的差值是 7 - 3 = 4，所以数字 `3` 在这个数组里出现了4次。
 
-By the way, if the value you're looking for is not in the array, then `rightBoundary` and `leftBoundary` return the same value and so the difference between them is 0.
+每个二分查找都用了4步，所以算法总共使用了8个步骤。对于只有12个元素的数组来说好像没什么性能提升，但随着数组变得越来越大，这个算法的性价比就会变得越来越高。对于一个有1,000,000个元素的有序数组，只需要花 2 x 20 = 40 步就能够计算出特定数值的出现次数。
 
-This is an example of how you can modify the basic binary search to solve other algorithmic problems as well. Of course, it does require that the array is sorted.
+对了，如果你要找的数值不在数组里，那么 `rightBoundary` 和 `leftBoundary` 会返回相同的结果，所以它们的差值就是0。
 
-*Written for Swift Algorithm Club by Matthijs Hollemans*
+这是一个把基础的二分查找稍作修改后用来解决其他算法问题的例子。当然了，它需要数组本身已经是有序的。
+
+*原文出自 Matthijs Hollemans*

@@ -234,7 +234,7 @@ Swift 算法俱乐部最初由 [Matthijs Hollemans](https://github.com/hollance)
 
 现在由 [Vincent Ngo](https://www.raywenderlich.com/u/jomoka)、 [Kelvin Lau](https://github.com/kelvinlauKL) 和 [Richard Ash](https://github.com/richard-ash) 共同维护。
 
-Swift 算法俱乐部是 [raywenderlich.com](https://www.raywenderlich.com) 社区中的[众多算法同好们](https://github.com/raywenderlich/swift-algorithm-club/graphs/contributors)一起努力的成果。期待你的参与 —— [加入俱乐部](.github/CONTRIBUTING.md)？:]
+Swift 算法俱乐部是 [raywenderlich.com](https://www.raywenderlich.com) 社区中的[众多算法同好们](https://github.com/raywenderlich/swift-algorithm-club/graphs/contributors)一起努力的成果。期待你的参与——[加入俱乐部](.github/CONTRIBUTING.md)？:]
 
 本翻译页面由 [David Lee](https://github.com/davidleee) 创建与维护。
 

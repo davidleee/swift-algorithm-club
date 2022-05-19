@@ -143,7 +143,7 @@ d: 0
 
 > **注意：** 如果目标字符串只有很少几个字符，直接用简单的穷举法会更快。在处理很短的目标字符串时，需要权衡构建跳过查询表和直接穷举法之间的优劣。
 
-> 这段代码基于《Dr Dobb's》杂志于1989年7月发表的文章 ["Faster String Searches" by Costas Menico](http://www.drdobbs.com/database/faster-string-searches/184408171) —— 你没看错，1989年！有时候留着那些旧杂志还是挺有用的。
+> 这段代码基于《Dr Dobb's》杂志于1989年7月发表的文章 ["Faster String Searches" by Costas Menico](http://www.drdobbs.com/database/faster-string-searches/184408171) ——你没看错，1989年！有时候留着那些旧杂志还是挺有用的。
 
 相关信息：算法的[一份详细分析报告](http://www.inf.fh-flensburg.de/lang/algorithmen/pattern/bmen.htm)。
 
