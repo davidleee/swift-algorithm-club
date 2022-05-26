@@ -1,26 +1,27 @@
-# Select Minimum / Maximum
+# 查找最小值/最大值
 
-Goal: Find the minimum/maximum object in an unsorted array.
+目标：在一个无序的数组中找出最小/最大的对象。
 
-## Maximum or minimum
+## 最大值 或 最小值
 
-We have an array of generic objects and we iterate over all the objects keeping track of the minimum/maximum element so far.
 
-### An example
+我们有一个由普通对象构成的数组，并且在遍历它所有元素的过程中记下当前时刻找到的最小/最大的元素。
 
-Let's say the we want to find the maximum value in the unsorted list `[ 8, 3, 9, 4, 6 ]`.
+### 一个例子
 
-Pick the first number, `8`, and store it as the maximum element so far. 
+比方说我们要找出 `[ 8, 3, 9, 4, 6 ]` 这个无序列表里的最大值。
 
-Pick the next number from the list, `3`, and compare it to the current maximum. `3` is less than `8` so the maximum `8` does not change.
+拿出第一个数字，`8`，并把它记录为当前时刻的最大元素。
 
-Pick the next number from the list, `9`, and compare it to the current maximum. `9` is greater than `8` so we store `9` as the maximum.
+从列表里拿出下一个数字，`3`，并把它和当前时刻的最大值做比较。`3` 比 `8` 要小，所以 `8` 还是作为最大值不用改变。
 
-Repeat this process until the all elements in the list have been processed.
+从列表里拿出下一个数字，`9`，并把它和当前时刻的最大值做比较。`9` 比 `8` 要大，所以我们把 `9` 记录为当前时刻的最大值。
 
-### The code
+重复这个过程，知道列表里的所有元素都被处理过了。
 
-Here is a simple implementation in Swift:
+### 代码
+
+下面是基于 Swift 的简单实现：
 
 ```swift
 func minimum<T: Comparable>(_ array: [T]) -> T? {
@@ -46,52 +47,52 @@ func maximum<T: Comparable>(_ array: [T]) -> T? {
 }
 ```
 
-Put this code in a playground and test it like so:
+把这段代码放进 playground 就可以这样验证它：
 
 ```swift
 let array = [ 8, 3, 9, 4, 6 ]
-minimum(array)   // This will return 3
-maximum(array)   // This will return 9
+minimum(array)   // 这会返回 3
+maximum(array)   // 这会返回 9
 ```
 
-### In the Swift standard library
+### 在 Swift 的标准库里
 
-The Swift library already contains an extension to `SequenceType` that returns the minimum/maximum element in a sequence.
+Swift 标准库里已经对 `SequenceType` 做了扩展，能够返回一系列元素里最大/最小的那个。
 
 ```swift
 let array = [ 8, 3, 9, 4, 6 ]
-array.minElement()   // This will return 3
-array.maxElement()   // This will return 9
+array.minElement()   // 这会返回 3
+array.maxElement()   // 这会返回 9
 ```
 
 ```swift
 let array = [ 8, 3, 9, 4, 6 ]
 //swift3
-array.min()   // This will return 3
-array.max()   // This will return 9
+array.min()   // 这会返回 3
+array.max()   // 这会返回 9
 ```
 
-## Maximum and minimum
+## 最大值 和 最小值
 
-To find both the maximum and minimum values contained in array while minimizing the number of comparisons we can compare the items in pairs. 
+为了同时找到数组里的最大值和最小值，并尽量减少给数字做比较的次数，我们可以成对地比较元素。
 
-### An example
+### 一个例子
 
-Let's say the we want to find the minimum and maximum value in the unsorted list `[ 8, 3, 9, 6, 4 ]`.
+假设我们要找出 `[ 8, 3, 9, 4, 6 ]` 这个无序列表里的最大值和最小值。
 
-Pick the first number, `8`, and store it as the minimum and maximum element so far. 
+拿出第一个数字，`8`，并把它记录为当前时刻的最大元素和最小元素。
 
-Because we have an odd number of items we remove `8` from the list which leaves the pairs `[ 3, 9 ]` and `[ 6, 4 ]`.
+因为我们列表里的元素个数是奇数，所以在我们把 `8` 移出列表之后，就剩下了两对元素：`[ 3, 9 ]` 和 `[ 6, 4 ]`。
 
-Pick the next pair of numbers from the list, `[ 3, 9 ]`. Of these two numbers, `3` is the smaller one, so we compare `3` to the current minimum `8`, and we compare `9` to the current maximum `8`. `3` is less than `8` so the new minimum is `3`. `9` is greater than `8` so the new maximum is `9`.
+拿出列表里的下一对数字，`[ 3, 9 ]`。在这两个数字当中，`3` 是比较小的那一个，所以我们把 `3` 跟当前的最小值 `8` 进行比较，然后把 `9` 和当前的最大值 `8` 进行比较。`3` 比 `8` 小，所以新的最小值是 `3`。`9` 比 `8` 大，所以新的最大值是 `9`。
 
-Pick the next pair of numbers from the list, `[ 6, 4 ]`. Here, `4` is the smaller one, so we compare `4` to the current minimum `3`, and we compare `6` to the current maximum `9`. `4` is greater than `3` so the minimum does not change. `6` is less than `9` so the maximum does not change.
+拿出列表里的下一对数字，`[ 6, 4 ]`。这一次，`4` 是比较小的那个，所以把 `4` 和当前最小值 `3` 比较，并且把 `6` 和当前最大值 `9` 比较。`4` 比 `3` 大，所以最小值不变。`6` 比 `9` 小，所以最大值不变。
 
-The result is a minimum of `3` and a maximum of `9`.
+最终的结果是，最小值为 `3` 和 最大值为`9`。
 
-### The code
+### 代码
 
-Here is a simple implementation in Swift:
+下面是基于 Swift 的简单实现：
 
 ```swift
 func minimumMaximum<T: Comparable>(_ array: [T]) -> (minimum: T, maximum: T)? {
@@ -100,8 +101,8 @@ func minimumMaximum<T: Comparable>(_ array: [T]) -> (minimum: T, maximum: T)? {
   }
   var maximum = minimum
 
-  // if 'array' has an odd number of items, let 'minimum' or 'maximum' deal with the leftover
-  let start = array.count % 2 // 1 if odd, skipping the first element
+  // 如果 `array` 有奇数个元素，那就让 'minimum' 或 'maximum' 与多出来的那一个成对
+  let start = array.count % 2 // 如果是奇数就会返回1，表示跳过第一个元素
   for i in stride(from: start, to: array.count, by: 2) {
     let pair = (array[i], array[i+1])
 
@@ -126,18 +127,18 @@ func minimumMaximum<T: Comparable>(_ array: [T]) -> (minimum: T, maximum: T)? {
 }
 ```
 
-Put this code in a playground and test it like so:
+把这段代码放进 playground 就可以这样验证它：
 
 ```swift
 let result = minimumMaximum(array)!
-result.minimum   // This will return 3
-result.maximum   // This will return 9
+result.minimum   // 这会返回 3
+result.maximum   // 这会返回 9
 ```
 
-By picking elements in pairs and comparing their maximum and minimum with the running minimum and maximum we reduce the number of comparisons to 3 for every 2 elements.
+通过成对取出元素并把它们分别跟最大值/最小值做比较，我们把每两个元素要做的比较次数加少到了3次。
 
-## Performance
+## 性能
 
-These algorithms run at **O(n)**. Each object in the array is compared with the running minimum/maximum so the time it takes is proportional to the array length.
+这个算法的复杂度是  **O(n)**。数组里的每一个对象都需要进行比较，所以花费的时间与数组的长度成正比。
 
-*Written by [Chris Pilcher](https://github.com/chris-pilcher)*
+*原文出自 [Chris Pilcher](https://github.com/chris-pilcher)*
