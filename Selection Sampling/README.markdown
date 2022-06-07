@@ -1,10 +1,10 @@
-# Selection Sampling
+# 选择抽样
 
-Goal: Select *k* items at random from a collection of *n* items.
+目标：在一个有 *n* 个元素的集合中随机选取 *k* 个元素。
 
-Let's say you have a deck of 52 playing cards and you need to draw 10 cards at random. This algorithm lets you do that.
+假设你有一副有着52张牌的扑克牌，然后需要随机抽出10张牌。这个算法就是帮你实现这个操作的。
 
-Here's a very fast version:
+下面是一个快捷的版本：
 
 ```swift
 func select<T>(from a: [T], count k: Int) -> [T] {
@@ -19,38 +19,38 @@ func select<T>(from a: [T], count k: Int) -> [T] {
 }
 ```
 
-As often happens with these [kinds of algorithms](../Shuffle/), it divides the array into two regions. The first region contains the selected items; the second region is all the remaining items.
+就像在[这类算法](../Shuffle/)里经常碰到的那样，它会把数组分成两个区域。一个区域存放着被选出的元素，另一个区域则是所有剩下的元素。
 
-Here's an example. Let's say the array is:
+下面是一个例子。假设我们有这个数组：
 
 	[ "a", "b", "c", "d", "e", "f", "g" ]
 	
-We want to select 3 items, so `k = 3`. In the loop, `i` is initially 0, so it points at `"a"`.
+我们想要选出 3 个元素，所以 `k = 3`。在循环里，`i` 一开始是 0，所以它指向的是 `"a"`。
 
 	[ "a", "b", "c", "d", "e", "f", "g" ]
 	   i
 
-We calculate a random number between `i` and `a.count`, the size of the array. Let's say this is 4. Now we swap `"a"` with `"e"`, the element at index 4, and move `i` forward:
+我们在 `i` 和数组的大小 `a.count` 之间计算出一个随机数。比方说结果是 `4` 吧。现在我们把 `"a"` 和下标为 4 的元素 `"e"` 进行交换，并把 `i` 往前移动一位：
 
 	[ "e" | "b", "c", "d", "a", "f", "g" ]
 	         i
 
-The `|` bar shows the split between the two regions. `"e"` is the first element we've selected. Everything to the right of the bar we still need to look at.
+分隔符 `|` 表示两个区域的间隔。`"e"` 是我们选出的第一个元素。我们还需要继续在右边区域里进行查找。
 
-Again, we ask for a random number between `i` and `a.count`, but because `i` has shifted, the random number can never be less than 1. So we'll never again swap `"e"` with anything.
+再来一次，在 `i` 和数组的大小 `a.count` 之间计算出一个随机数，但因为 `i` 已经移动了，所以随机数绝不可能会小于 1。所以我们也绝不会把 `"e"` 和其他元素交换。
 
-Let's say the random number is 6 and we swap `"b"` with `"g"`:
+假设随机数是 6 然后我们把 `"b"` 和 `"g"` 的位置交换：
 
 	[ "e" , "g" | "c", "d", "a", "f", "b" ]
 	               i
 
-One more random number to pick, let's say it is 4 again. We swap `"c"` with `"a"` to get the final selection on the left:
+还需要再挑一个随机数，假设又是 4 吧。我们交换 `"c"` 和 `"a"` 的位置，然后在左侧区域得到我们最终的选择：
 
 	[ "e", "g", "a" | "d", "c", "f", "b" ]
 
-And that's it. Easy peasy. The performance of this function is **O(k)** because as soon as we've selected *k* elements, we're done.
+完事儿了。道理非常简单。这个函数的复杂度是 **O(k)**，因为一旦我们选出 *k* 个元素，算法就结束了。
 
-Here is an alternative algorithm, called "reservoir sampling":
+下面是算法的一种变体，它被称为“蓄水池抽样法”：
 
 ```swift
 func reservoirSample<T>(from a: [T], count k: Int) -> [T] {
@@ -71,16 +71,16 @@ func reservoirSample<T>(from a: [T], count k: Int) -> [T] {
 }
 ```
 
-This works in two steps:
+它的工作原理集中在两个步骤里：
 
-1. Fill the `result` array with the first `k` elements from the original array. This is called the "reservoir".
-2. Randomly replace elements in the reservoir with elements from the remaining pool.
+1. 用数组里的前 `k` 个元素填充 `result` 数组。这个被称为“蓄水池”。
+2. 在剩下的元素里随机选出元素与蓄水池中的元素进行交换。
 
-The performance of this algorithm is **O(n)**, so it's a little bit slower than the first algorithm. However, its big advantage is that it can be used for arrays that are too large to fit in memory, even if you don't know what the size of the array is (in Swift this might be something like a lazy generator that reads the elements from a file).
+这个算法的复杂度是 **O(n)**，所以它比第一个算法稍微慢一点。然而，它的优势在于，它可以用于那些大到不能放进内存的数组，即使你根本不知道数组的大小是多少（在 Swift 里这可能是一个从文件里读取元素的延迟生成器）。
 
-There is one downside to the previous two algorithms: they do not keep the elements in the original order. In the input array `"a"` came before `"e"` but now it's the other way around. If that is an issue for your app, you can't use this particular method.
+上述两个算法有一个缺点：它们不能维持数组元素原有的顺序。在传入的数组里，`"a"` 在 `"e"` 的前面，但现在它们的顺序已经反过来了。如果这种情况在你的软件里是个问题，那你就不能使用这个方法了。
 
-Here is an alternative approach that does keep the original order intact, but is a little more involved:
+下面是一种能维持原有顺序的变体算法，但这会稍微复杂一点：
 
 ```swift
 func select<T>(from a: [T], count requested: Int) -> [T] {
@@ -105,77 +105,77 @@ func select<T>(from a: [T], count requested: Int) -> [T] {
 }
 ```
 
-This algorithm uses probability to decide whether to include a number in the selection or not. 
+这个算法用概率来决定是否要把一个数字放进我们的选项里。
 
-1. The loop steps through the array from beginning to end. It keeps going until we've selected *k* items from our set of *n*. Here, *k* is called `requested` and *n* is `a.count`.
+1. 循环会从头到尾遍历数组。它会不断运行直到我们从 *n* 个元素里选出了 *k* 个选中项。在这个例子里，*k* 是 `requested` 而 *n* 就是 `a.count`。
 
-2. Calculate a random number between 0 and 1. We want `0.0 <= r < 1.0`. The higher bound is exclusive; we never want it to be exactly 1. That's why we divide the result from `arc4random()` by `0x100000000` instead of the more usual `0xffffffff`.
+2. 在 0 和 1 里随机选择一个。我们想要得到 `0.0 <= r < 1.0`。范围的上界是排除在外的，我们不想它恰好等于 1。这也就是为什么我们要用 `arc4random()` 除以 `0x100000000` 而不是更常见的 `0xffffffff`。
 
-3. `leftToExamine` is how many items we still haven't looked at. `leftToAdd` is how many items we still need to select before we're done.
+3. `leftToExamine` 表示我们还剩下多少个没有检查过的元素。`leftToAdd` 表示我们还需要选出多少个元素。
 
-4. This is where the magic happens. Basically, we're flipping a coin. If it was heads, we add the current array element to the selection; if it was tails, we skip it.
+4. 这里就是见证奇迹的地方。基本上我们相当于在抛硬币。如果它正面朝上，我们就把当前的数组元素添加到选中项里；如果它是背面朝上，我们就跳过它。
 
-Interestingly enough, even though we use probability, this approach always guarantees that we end up with exactly *k* items in the output array.
+有趣的是，即使我们是基于概率学执行的算法，这个方法永远能保证我们最后输出的数组中正好有 *k* 个选中的元素。
 
-Let's walk through the same example again. The input array is:
+让我们用同一个例子来验证一遍。输入的数组是这个：
 
 	[ "a", "b", "c", "d", "e", "f", "g" ]
 
-The loop looks at each element in turn, so we start at `"a"`. We get a random number between 0 and 1, let's say it is 0.841. The formula at `// 4` multiplies the number of items left to examine with this random number. There are still 7 elements left to examine, so the result is: 
+循环会依次检查每一个元素，所以我们从 `"a"` 开始。我们在 0 到 1 之间取得一个随机数，假设是 0.841 吧。位于 `// 4` 那一行的公式会把还没有检查的元素个数与这个随机数相乘。目前还有 7 个元素没有被检查，所以结果就是：
 
 	7 * 0.841 = 5.887
 
-We compare this to 3 because we wanted to select 3 items. Since 5.887 is greater than 3, we skip `"a"` and move on to `"b"`.
+我们把这个数与 3 比较，因为我们想要选出 3 个元素。5.887 比 3 要大，所以我们跳过 `"a"` 并前进到 `"b"`。
 
-Again, we get a random number, let's say 0.212. Now there are only 6 elements left to examine, so the formula gives:
+再来，我们取得一个随机数，假设是 0.212 吧。现在只剩下 6 个还没被检查的元素了，所以那个公式的结果是：
 
 	6 * 0.212 = 1.272
 
-This *is* less than 3 and we add `"b"` to the selection. This is the first item we've selected, so two left to go.
+这个数比 3 要小，所以我们把 `"b"` 加入到选中项里。这是我们第一个选中的元素，我们还剩下 2 个要选。
 
-On to the next element, `"c"`. The random number is 0.264, giving the result:
+继续处理下一个元素 `"c"`。假设随机数是 0.264，相应的公式结果是：
 
 	5 * 0.264 = 1.32
 
-There are only 2 elements left to select, so this number must be less than 2. It is, and we also add `"c"` to the selection. The total selection is `[ "b", "c" ]`.
+还要选出 2 个元素，所以这个数字必须要小于 2 才行。结果确实如此，所以我们把 `"c"` 添加到选中项里。现在完整的选中项是 `[ "b", "c" ]`。
 
-Only one item left to select but there are still 4 candidates to look at. Suppose the next random number is 0.718. The formula now gives:
+只需要再选出一个，然而我们还有 4 个还没有被检查的候选者。假设下一个随机数是 0.718。公式会得出：
 
 	4 * 0.718 = 2.872
 
-For this element to be selected the number has to be less than 1, as there is only 1 element left to be picked. It isn't, so we skip `"d"`. Only three possibilities left -- will we make it before we run out of elements?
+对于这次要选出的元素来说，数字必须小于 1 才行，因为只剩下 1 个元素要选了。结果并没有小于 1，所以我们跳过 `"d"`。只剩下 3 个可能的选项了，我们能在元素都检查完之前完成目标吗？
 
-The random number is 0.346. The formula gives:
+随机数是 0.346。公式的结果是：
 
 	3 * 0.346 = 1.038
 	
-Just a tiny bit too high. We skip `"e"`. Only two candidates left...
+还是大了一丁点。我们跳过 `"e"`。只剩下两个候选者了...
 
-Note that now literally we're dealing with a coin toss: if the random number is less than 0.5 we select `"f"` and we're done. If it's greater than 0.5, we go on to the final element. Let's say we get 0.583:
+要注意我们其实是在抛硬币：如果随机数小于 0.5 我们就能选中 `"f"` 并完成目标。如果它大于 0.5，我们就要前进到最后一个元素的位置。假设我们得到随机数 0.583：
 
 	2 * 0.583 = 1.166
 
-We skip `"f"` and look at the very last element. Whatever random number we get here, it should always select `"g"` or we won't have selected enough elements and the algorithm doesn't work!
+我们跳过 `"f"` 并检查最后一个元素。不管我们拿到的随机数是多少，它都必须要选中 `"g"`，否则我们的选中项就不够了，也就说明算法有问题了！
 
-Let's say our final random number is 0.999 (remember, it can never be 1.0 or higher). Actually, no matter what we choose here, the formula will always give a value less than 1:
+假设我们最后的随机数是 0.999（记住，它不可能大于或等于 1.0）。实际上，不管我们拿到的随机数是多少，公式的结果永远是小于 1 的：
 
 	1 * 0.999 = 0.999
 
-And so the last element will always be chosen if we didn't have a big enough selection yet. The final selection is `[ "b", "c", "g" ]`. Notice that the elements are still in their original order, because we examined the array from left to right.
+于是，如果我们的选中项不够，那么最后一个元素就一定会被选上。最终的选中项是`[ "b", "c", "g" ]`。元素之间还保持着它们原来的相对顺序，因为我们是从左往右对数组进行检查的。
 
-Maybe you're not convinced yet... What if we always got 0.999 as the random value (the maximum possible), would that still select 3 items? Well, let's do the math:
+也许你心里还有疑惑...如果我们的随机数一直都是 0.999 呢（可能结果里的最大值），它还会选出 3 个元素吗？好吧，我们来计算一下：
 
-	7 * 0.999 = 6.993     is this less than 3? no
-	6 * 0.999 = 5.994     is this less than 3? no
-	5 * 0.999 = 4.995     is this less than 3? no
-	4 * 0.999 = 3.996     is this less than 3? no
-	3 * 0.999 = 2.997     is this less than 3? YES
-	2 * 0.999 = 1.998     is this less than 2? YES
-	1 * 0.999 = 0.999     is this less than 1? YES
+	7 * 0.999 = 6.993     结果小于 3 吗？ 不是
+	6 * 0.999 = 5.994     结果小于 3 吗？ 不是
+	5 * 0.999 = 4.995     结果小于 3 吗？ 不是
+	4 * 0.999 = 3.996     结果小于 3 吗？ 不是
+	3 * 0.999 = 2.997     结果小于 3 吗？ 是的
+	2 * 0.999 = 1.998     结果小于 2 吗？ 是的
+	1 * 0.999 = 0.999     结果小于 1 吗？ 是的
 
-It always works! But does this mean that elements closer to the end of the array have a higher probability of being chosen than those in the beginning? Nope, all elements are equally likely to be selected. (Don't take my word for it: see the playground for a quick test that shows this in practice.)
+它总是能完成任务的！但这是否意味着更靠近数组结尾的元素的选中概率比靠近开头的那些元素要高呢？不，所有元素被选中的概率是一样的。（不要认定这里的说法就是对的，用 playground 实际验证一下。）
 
-Here's an example of how to test this algorithm:
+下面是如何验证这个算法的一个例子：
 
 ```swift
 let input = [
@@ -191,10 +191,10 @@ print(output)
 print(output.count)
 ```
 
-The performance of this second algorithm is **O(n)** as it may require a pass through the entire input array.
+这第二个算法的复杂度是 **O(n)** 因为它需要遍历整个输入数组。
 
-> **Note:** If `k > n/2`, then it's more efficient to do it the other way around and choose `a.count - k` items to remove.
+> **注意：** 如果 `k > n/2`，那么反过计算的效率更高，也就是选出要剔除的 `a.count - k` 个元素。
 
-Based on code from Algorithm Alley, Dr. Dobb's Magazine, October 1993.
+文章内容基于 Dr. Dobb's 杂志发表于 1993 年十月的 Algorithm Alley。
 
-*Written for Swift Algorithm Club by Matthijs Hollemans*
+*本文原文出自 Matthijs Hollemans*
