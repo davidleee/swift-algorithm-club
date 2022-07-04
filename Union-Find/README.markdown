@@ -1,30 +1,30 @@
-# Union-Find
+# 并查集
 
-Union-Find is a data structure that can keep track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. It is also known as disjoint-set data structure.
+当一组元素被分隔成若干个不相交的子集时，并查集就是能用于跟踪这些不重合子集的数据结构。它也被称为不相交集合。
 
-What do we mean by this? For example, the Union-Find data structure could be keeping track of the following sets:
+这个绕口的定义是什么意思呢？举个例子，并查集可以用来跟踪下面这样的集合：
 
 	[ a, b, f, k ]
 	[ e ]
 	[ g, d, c ]
 	[ i, j ]
 
-These sets are **disjoint** because they have no members in common.
+这些集合是 **不相交的** 因为它们之间不存在相同的元素。
 
-Union-Find supports three basic operations:
+并查集支持下面三种基础操作：
 
-1. **Find(A)**: Determine which subset an element **A** is in. For example, `find(d)` would return the subset `[ g, d, c ]`.
+1. **Find(A)**：判断元素 **A** 在哪一个子集里。比如说，`find(d)` 会返回子集 `[ g, d, c ]`。
 
-2. **Union(A, B)**: Join two subsets that contain **A** and **B** into a single subset. For example, `union(d, j)` would combine `[ g, d, c ]` and `[ i, j ]` into the larger set `[ g, d, c, i, j ]`.
+2. **Union(A, B)**：把包含元素 **A** 和 **B** 的两个子集合并成一个。比如说，`union(d, j)` 会把子集 `[ g, d, c ]` 和 `[ i, j ]` 合并成一个更大的集合 `[ g, d, c, i, j ]`。
 
-3. **AddSet(A)**: Add a new subset containing just that element **A**. For example, `addSet(h)` would add a new set `[ h ]`.
+3. **AddSet(A)**：添加一个只包含了元素 **A** 的新子集。比如说，`addSet(h)` 会添加一个新的集合 `[ h ]`。
 
-The most common application of this data structure is keeping track of the connected components of an undirected [graph](../Graph/). It is also used for implementing an efficient version of Kruskal's algorithm to find the minimum spanning tree of a graph.
+这种数据结构最常用于跟踪无向[图](../Graph/)里的相连组件。它还经常被用于实现 Kruskal 算法的另一种更高效版本，这种算法会被用来查找图的最小生成树。
 
-## Implementation
+## 实现
 
-Union-Find can be implemented in many ways but we'll look at an efficient and easy to understand implementation: Weighted Quick Union.
-> __PS: Multiple implementations of Union-Find has been included in playground.__
+并查集有许多种实现方式，我们来看一种高效而且易于理解的方案：加权快速并集。
+> __PS: 文章附带的 playground 里有多种并查集的实现方式。__
 
 ```swift
 public struct UnionFind<T: Hashable> {
@@ -34,16 +34,16 @@ public struct UnionFind<T: Hashable> {
 }
 ```
 
-Our Union-Find data structure is actually a forest where each subset is represented by a [tree](../Tree/).
+我们的并查集其实是一座森林，其中每一个子集都用一颗[树](../Tree/)来表示。
 
-For our purposes we only need to keep track of the parent of each tree node, not the node's children. To do this we use the array `parent` so that `parent[i]` is the index of node `i`'s parent.
+基于我们要实现的目标，我们只需要跟踪树上每个节点的父节点，而不需要跟踪它们的子节点。于是我们用一个 `parent` 数组来管理父节点，其中 `parent[i]` 表示节点 `i` 的父节点的下标。
 
-Example: If `parent` looks like this,
+例子：如果 `parent` 长这样：
 
 	parent [ 1, 1, 1, 0, 2, 0, 6, 6, 6 ]
 	     i   0  1  2  3  4  5  6  7  8
 
-then the tree structure looks like:
+那么对应的树结构就长这样：
 
 	      1              6
 	    /   \           / \
@@ -51,17 +51,17 @@ then the tree structure looks like:
 	 / \     /
 	3   5   4
 
-There are two trees in this forest, each of which corresponds to one set of elements. (Note: due to the limitations of ASCII art the trees are shown here as binary trees but that is not necessarily the case.)
+这是森林里的两棵树，每一棵树都对应了一组元素。（小提醒：基于上面这种绘图方式的限制，两棵树都被画成了二叉树，但实际上它们不一定要是这种形式。）
 
-We give each subset a unique number to identify it. That number is the index of  the root node of that subset's tree. In the example, node `1` is the root of the first tree and `6` is the root of the second tree.
+我们把每一个子集都用一个唯一的数字来标记。这个用来标记的数字就是子集树的根节点的下标。在这个例子里，节点 `1` 是第一个棵树的根节点，而 `6` 是第二棵树的根节点。
 
-So in this example we have two subsets, the first with the label `1` and the second with the label `6`. The **Find** operation actually returns the set's label, not its contents.
+所以在这个例子中我们有两个子集，第一个子集会用 `1` 来标记，而第二个则用 `6` 来标记。前面提到的 **Find** 方法其实返回的是集合的标记数字，而不是它的内容。
 
-Note that the `parent[]` of a root node points to itself. So `parent[1] = 1` and `parent[6] = 6`. That's how we can tell something is a root node.
+注意根节点的 `parent[]` 指向的是它自己。所以有 `parent[1] = 1` 和 `parent[6] = 6`。这也是我们用来判断根节点的方法。
 
-## Add set
+## 添加集合
 
-Let's look at the implementation of these basic operations, starting with adding a new set.
+来看看这些基础操作的实现，从添加一个新的集合开始。
 
 ```swift
 public mutating func addSetWith(_ element: T) {
@@ -71,17 +71,17 @@ public mutating func addSetWith(_ element: T) {
 }
 ```
 
-When you add a new element, this actually adds a new subset containing just that element.
+当你添加一个新的元素时，其实是添加了一个只包含了这个新元素的新子集。
 
-1. We save the index of the new element in the `index` dictionary. That lets us look up the element quickly later on.
+1. 我们把新元素的下标保存到 `index` 字典里。这样做能让未来查找元素的操作更快一些。
 
-2. Then we add that index to the `parent` array to build a new tree for this  set. Here, `parent[i]` is pointing to itself because the tree that represents the new set contains only one node, which of course is the root of that tree.
+2. 然后我们把这个下标添加到 `parent` 数组里，为这个集合构建一棵新的树。这个时候，`parent[i]` 指向的正是它自己，因为这棵树所表示的集合只有一个元素，所以这个元素表示的节点当然就是树的根节点。
 
-3. `size[i]` is the count of nodes in the tree whose root is at index `i`. For the new set this is 1 because it only contains the one element. We'll be using the `size` array in the Union operation.
+3. `size[i]` 表示根节点在下标 `i` 的树所包含的节点个数。对于新集合来说，因为它只有一个元素，所以这里保存的就是 1。我们会在求交集的操作里用到 `size` 数组。
 
-## Find
+## 查找
 
-Often we want to determine whether we already have a set that contains a given element. That's what the **Find** operation does. In our `UnionFind` data structure it is called `setOf()`:
+我们时常需要判断某个元素是不是已经存在于某个集合里。这时候就轮到 **Find** 操作出马了。在我们的 `UnionFind` 数据结构里，这个操作叫 `setOf()`：
 
 ```swift
 public mutating func setOf(_ element: T) -> Int? {
@@ -93,7 +93,7 @@ public mutating func setOf(_ element: T) -> Int? {
 }
 ```
 
-This looks up the element's index in the `index` dictionary and then uses a helper method to find the set that this element belongs to:
+它会在 `index` 字典里找到元素的下标，然后通过一个工具方法来找到这个元素所属的集合：
 
 ```swift
 private mutating func setByIndex(_ index: Int) -> Int {
@@ -106,29 +106,29 @@ private mutating func setByIndex(_ index: Int) -> Int {
 }
 ```
 
-Because we're dealing with a tree structure, this is a recursive method.
+因为我们在处理一个树结构，所以这里用到的是一个递归方法。
 
-Recall that each set is represented by a tree and that the index of the root node serves as the number that identifies the set. We're going to find the root node of the tree that the element we're searching for belongs to, and return its index.
+上文有提到每个集合都是由一棵树来表示的，并且根节点的下标会被用来标识这个集合。我们要找的是目标元素所属的树的根节点，然后返回它的下标。
 
-1. First, we check if the given index represents a root node (i.e. a node whose `parent` points back to the node itself). If so, we're done.
+1. 首先，我们会检查传入的下标是不是表示了一个根节点（也就是节点中的 `parent` 指向了自己的）。如果是这样，那我们就搞定收工了。
 
-2. Otherwise we recursively call this method on the parent of the current node. And then we do a **very important thing**: we overwrite the parent of the current node with the index of root node, in effect reconnecting the node directly to the root of the tree. The next time we call this method, it will execute faster because the path to the root of the tree is now much shorter. Without that optimization, this method's complexity is **O(n)** but now in combination with the size optimization (covered in the Union section) it is almost **O(1)**.
+2. 否则，我们就对当前节点的父节点递归调用这个方法。然后我们要做一件 **非常重要的事情**：用根节点覆盖掉当前节点的父节点，这会把当前节点直接与树的根节点相连。下次我们再调用这个方法的时候，因为到树根的路径变短了，所以它会执行得更快。如果没有这层优化，这个方法的复杂度是 **O(n)**，但现在有了这层优化之后，复杂度就几乎是 **O(1)**。
 
-3. We return the index of the root node as the result.
+3. 我们把根节点的下标作为结果返回出去。
 
-Here's illustration of what I mean. Let's say the tree looks like this:
+下面来演示一下整个过程。假如有这样的一棵树：
 
 ![BeforeFind](Images/BeforeFind.png)
 
-We call `setOf(4)`. To find the root node we have to first go to node `2` and then to node `7`. (The indices of the elements are marked in red.)
+我们执行 `setOf(4)`。为了找到根节点，我们首先要去往节点 `2`，然后是节点 `7`。（元素的索引用红色表示）
 
-During the call to `setOf(4)`, the tree is reorganized to look like this:
+在执行 `setOf(4)` 的过程中，这棵树被重新调整成了这样：
 
 ![AfterFind](Images/AfterFind.png)
 
-Now if we need to call `setOf(4)` again, we no longer have to go through node `2` to get to the root. So as you use the Union-Find data structure, it optimizes itself. Pretty cool!
+现在如果再次调用 `setOf(4)`，我们就不用经过 `2` 这个节点才能到达根节点。于是，并查集这种数据结构就会在被使用的过程中自行优化自己的尺寸。厉害啊！
 
-There is also a helper method to check that two elements are in the same set:
+还有一个工具方法可以用来判断两个元素是否在同一个集合里：
 
 ```swift
 public mutating func inSameSet(_ firstElement: T, and secondElement: T) -> Bool {
@@ -140,53 +140,53 @@ public mutating func inSameSet(_ firstElement: T, and secondElement: T) -> Bool 
 }
 ```
 
-Since this calls `setOf()` it also optimizes the tree.
+这个方法也调用了 `setOf()` 所以它也会对树进行优化。
 
-## Union (Weighted)
+## 并集 (加权)
 
-The final operation is **Union**, which combines two sets into one larger set.
+最后一个操作是 **并集**，它会将两个集合合并成一个更大的集合。
 
 ```swift
-    public mutating func unionSetsContaining(_ firstElement: T, and secondElement: T) {
-        if let firstSet = setOf(firstElement), let secondSet = setOf(secondElement) { // 1
-            if firstSet != secondSet {                // 2
-                if size[firstSet] < size[secondSet] { // 3
-                    parent[firstSet] = secondSet      // 4
-                    size[secondSet] += size[firstSet] // 5
-                } else {
-                    parent[secondSet] = firstSet
-                    size[firstSet] += size[secondSet]
-                }
+public mutating func unionSetsContaining(_ firstElement: T, and secondElement: T) {
+    if let firstSet = setOf(firstElement), let secondSet = setOf(secondElement) { // 1
+        if firstSet != secondSet {                // 2
+            if size[firstSet] < size[secondSet] { // 3
+                parent[firstSet] = secondSet      // 4
+                size[secondSet] += size[firstSet] // 5
+            } else {
+                parent[secondSet] = firstSet
+                size[firstSet] += size[secondSet]
             }
         }
     }
+}
 ```
 
-Here is how it works:
+下面是它的工作原理：
 
-1. We find the sets that each element belongs to. Remember that this gives us two integers: the indices of the root nodes in the `parent` array.
+1. 我们找到每个元素所属的结合。这会给我们返回两个整数：分别表示 `parent` 数组里各自的根节点的索引。
 
-2. Check that the sets are not equal because if they are it makes no sense to union them.
+2. 检查这两个集合是不是同一个，因为如果它们在同一个集合里，就没有必要去合并什么了。
 
-3. This is where the size optimization comes in (Weighting). We want to keep the trees as shallow as possible so we always attach the smaller tree to the root of the larger tree. To determine which is the smaller tree we compare trees by their sizes.
+3. 这是尺寸优化发挥作用的地方（添加权重）。我们希望尽可能让树更矮，所以我们总是把最小的树连接到最大的树的根节点上去。我们通过比较树的尺寸来判断哪一棵树是更小的。
 
-4. Here we attach the smaller tree to the root of the larger tree.
+4. 这里我们把比较小的那棵树连接到比较大的那棵树的根节点上。
 
-5. Update the size of larger tree because it just had a bunch of nodes added to it.
+5. 因为我们刚刚把新节点添加到了较大树上，所以要更新它的尺寸。
 
-An illustration may help to better understand this. Let's say we have these two sets, each with its own tree:
+下面的示例也许能帮助理解这个过程。假设我们有如下两个集合，每个集合都由各自的树来表示：
 
 ![BeforeUnion](Images/BeforeUnion.png)
 
-Now we call `unionSetsContaining(4, and: 3)`. The smaller tree is attached to the larger one:
+现在我们来调用 `unionSetsContaining(4, and: 3)` 方法。较小的树会被添加到较大的树上：
 
 ![AfterUnion](Images/AfterUnion.png)
 
-Note that, because we call `setOf()` at the start of the method, the larger tree was also optimized in the process -- node `3` now hangs directly off the root.
+注意看，因为我们在方法的一开始就调用了 `setOf()`，所以较大树在过程中也会被优化 —— 节点 `3` 现在直接连接到了根节点上。
 
-Union with optimizations also takes almost **O(1)** time.
+优化后的并集过程也几乎有着 **O(1)** 的复杂度。
 
-## Path Compression
+## 路径压缩
 ```swift
 private mutating func setByIndex(_ index: Int) -> Int {
     if index != parent[index] {
@@ -196,30 +196,30 @@ private mutating func setByIndex(_ index: Int) -> Int {
     return parent[index]
 }
 ```
-Path Compression helps keep trees very flat, thus find operation could take __ALMOST__ in __O(1)__
+路经压缩能帮助树维持扁平，于是查询操作的复杂度就  **几乎** 是 __O(1)__。
 
-## Complexity Summary
+## 复杂度总结
 
-##### To process N objects
-| Data Structure | Union | Find |
+##### 处理 N 个对象
+| 数据结构 | 并集 | 查找 |
 |---|---|---|
-|Quick Find|N|1|
-|Quick Union|Tree height|Tree height|
-|Weighted Quick Union|lgN|lgN|
-|Weighted Quick Union + Path Compression| very close, but not O(1)| very close, but not O(1) |
+|快速查询|N|1|
+|快速并集|树的高度|树的高度|
+|加权快速并集|lgN|lgN|
+|加权快速并集 + 路径压缩| 非常接近但达不到 O(1)| 非常接近但达不到 O(1) |
 
-##### To process M union commands on N objects
-| Algorithm | Worst-case time|
+##### 对 N 个对象执行 M 次并集操作
+| 算法 | 最坏耗时 |
 |---|---|
-|Quick Find| M N |
-|Quick Union| M N |
-|Weighted Quick Union| N + M lgN |
-|Weighted Quick Union + Path Compression| (M + N) lgN |
+|快速查询| M N |
+|快速并集| M N |
+|加权快速并集| N + M lgN |
+|加权快速并集 + 路径压缩| (M + N) lgN |
 
-## See also
+## 相关信息
 
-See the playground for more examples of how to use this handy data structure.
+在 playground 里有更多关于如何使用这个方便的数据结构的例子。
 
-[Union-Find at Wikipedia](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+[维基百科上的并查集](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
 
-*Written for Swift Algorithm Club by [Artur Antonov](https://github.com/goingreen)*, *modified by [Yi Ding](https://github.com/antonio081014).*
+*原文出自 [Artur Antonov](https://github.com/goingreen)* *经由 [Yi Ding](https://github.com/antonio081014) 编辑*
